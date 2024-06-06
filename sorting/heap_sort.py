@@ -1,33 +1,35 @@
 from common import *
 
-
-def heapify(arr, idx):
+#recursive approach takes up logn extra space
+def heapify_recursive(arr, idx):
     if idx >= len(arr):
         return 
-    heapify(arr, 2*idx+1)
-    heapify(arr, 2*idx+2)
+    heapify_recursive(arr, 2*idx+1)
+    heapify_recursive(arr, 2*idx+2)
     push_down(arr, idx)
 
 
-def push_down(arr, idx):
-    while idx < len(arr):
-        # has both left and right child
-        if 2*idx+2 < len(arr):
-            root, left, right = arr[idx], arr[2*idx+1], arr[2*idx+2]
-            if root <= left and root <= right:
-                return 
-            elif left <= root and left <= right:
-                swap(arr, idx, 2*idx+1)
-                idx = 2*idx+1
-            else:
-                swap(arr, idx, 2*idx+2)
-                idx = 2*idx+2
-        # has only left child
-        elif 2*idx+1 < len(arr) and arr[2*idx+1] < arr[idx]:
-            swap(arr, idx, 2*idx+1)
-            idx = 2*idx+1
-        else:
+def heapify(arr):
+    for i in range((len(arr)-1)//2, -1, -1):
+        push_down(arr, i)
+
+
+
+def push_down(arr, idx, limit = -1):
+    limit = len(arr) if limit < 0 else limit 
+    while idx < limit:
+        largest_idx = idx
+
+        if 2*idx + 1 < limit and arr[2*idx + 1] > arr[largest_idx]:
+            largest_idx = 2*idx + 1
+        if 2*idx + 2 < limit and arr[2*idx + 2] > arr[largest_idx]:
+            largest_idx = 2 * idx + 2
+
+        if largest_idx == idx:
             return
+
+        swap(arr, idx, largest_idx)
+        idx = largest_idx
 
 
 def bubble_up(arr, idx):
@@ -36,11 +38,11 @@ def bubble_up(arr, idx):
         idx = (idx-1)//2
 
 
-class Heap():
+class MaxHeap():
 
     def __init__(self, arr):
         self.pq = arr 
-        heapify(self.pq, 0)
+        heapify(self.pq)
         
     def push(self, elem):
         self.pq.append(elem)
@@ -55,15 +57,19 @@ class Heap():
     def is_empty(self):
         return len(self.pq) <= 0
 
+    # sort by swapping heap top to end of priority queue and reduce push_down range
+    def sort(self):
+        for i in range(len(self.pq)-1, -1, -1):
+            swap(self.pq, 0, i)
+            push_down(self.pq, 0, i)
+        return self.pq
+
 
 
 
 def heap_sort(arr):
-    heap = Heap(arr)
-    res = []
-    while not heap.is_empty():
-        res.append(heap.pop())
-    return res 
+    heap = MaxHeap(arr)
+    return heap.sort()
 
 test_sorting(heap_sort)
 
