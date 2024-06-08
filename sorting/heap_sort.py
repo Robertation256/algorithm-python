@@ -68,6 +68,7 @@ class MaxHeap():
 
 
 def heap_sort(arr):
+    #first heapify into a max heap then do swapping heap top to end of priority queue and reduce push_down range
     heap = MaxHeap(arr)
     return heap.sort()
 
