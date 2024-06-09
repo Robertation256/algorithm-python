@@ -1,6 +1,9 @@
 
 # produce a linear ordering of vertices such that for every directed edge u-v, vertex u comes before v in the ordering.
 # used for resolving dependency and cycle detection in a directed graph
+
+#time complexity: O(V+E)
+#space complexity: O(V)
 def topological_sort(nodes: list[str], adj_list: dict[str, list[str]]):
     in_degree = {n: 0 for n in nodes}
     candidates = []
