@@ -30,7 +30,7 @@ def tarjan_scc(adj_list: dict[str, list[str]]) -> list[list[str]]:
                 low_link_map[node] = min(low_link_map[node], low_link_map[neighbor])
             
             # spotted a backedge
-            elif neighbor in on_stack_elem:     # obviously we can use additional auxilary space to reduce this lookup cost
+            elif neighbor in on_stack_elem: 
                 low_link_map[node] = min(low_link_map[node], low_link_map[neighbor])
 
         # current node started the scc
