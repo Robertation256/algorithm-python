@@ -10,7 +10,8 @@
 # 2. Tarjan's SCC algorithm by Robert Tarjan
 
 
-
+# time complexity: O(V+E) since it is just DFS
+# space complexity: O(V)
 def tarjan_scc(adj_list: dict[str, list[str]]) -> list[list[str]]:
     
     low_link_map = dict()       # tracks the lowest discover time of nodes that current node can reach
@@ -25,7 +26,7 @@ def tarjan_scc(adj_list: dict[str, list[str]]) -> list[list[str]]:
         low_link_map[node] = discover_time
 
         for neighbor in adj_list[node]:
-            if not neighbor in  low_link_map:   # not yet visited
+            if not neighbor in low_link_map:   # not yet visited
                 dfs(neighbor)
                 low_link_map[node] = min(low_link_map[node], low_link_map[neighbor])
             
