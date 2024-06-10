@@ -1,7 +1,8 @@
 from common import *
 
 # can be applied to data that can be lexicographically sorted
-# time complexity O(nd) where d is the number of digits in the longest element
+# time complexity O(nk) where k is the number of digits in the longest element
+# note that k can be larger than O(logn) in many cases (ie, consider the case of [1, 2, 3, 1000001, 1000002, ...])
 # space complexity O(n)
 # stable sorting
 def radix_sort(arr, radix = 10):

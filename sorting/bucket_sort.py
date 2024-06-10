@@ -15,7 +15,7 @@ def bucket_sort(arr):
     buckets = [[] for i in range(len(arr)) ]
 
     for n in arr:
-        idx =  max(floor((n - mini) / (maxi - mini) * n ), n-1)
+        idx =  min(floor((n - mini) / (maxi - mini) * n ), n-1)
         buckets[idx].append(n)
     
     res = []
