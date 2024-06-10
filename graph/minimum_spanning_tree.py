@@ -12,10 +12,16 @@
 
 
 # assume input of a list edges(u, v ,weight)
+
+#time complexity: O(ElogE + ElogV) since E <= V**2, ElogE == ElogV, complexity is ElogE
+#space complexity: O(V)
 def kruskal_mst(edges: list[tuple[str, str, int]]):
 
     # setup union-find
-    parent = {v: v for v in adj_list.keys}
+    parent = dict()
+    for u, v, _ in edges:
+        parent[u] = u
+        parent[v] = v
 
     def find(a):
         if a != parent[a]:

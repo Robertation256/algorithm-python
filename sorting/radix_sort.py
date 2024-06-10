@@ -10,17 +10,17 @@ def radix_sort(arr, radix = 10):
     exp = 0
     
     while max_val > 0:
-        count = [0 for _ in range(10)]
+        count = [0 for _ in range(radix)]
         d = radix ** exp
         for n in arr:
-            count[(n//d)%10] += 1
+            count[(n//d)%radix] += 1
 
-        for i in range(1, 10):
+        for i in range(1, radix):
             count[i] += count[i-1]
 
         for i in range(len(arr)-1, -1, -1):  # go from the back to ensure sorting stability
             value = arr[i]
-            digit = (value//d) % 10
+            digit = (value//d) % radix
             nex[count[digit]-1] = value
             count[digit] -= 1
         

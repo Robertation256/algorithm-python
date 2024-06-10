@@ -8,7 +8,7 @@ def heapify_recursive(arr, idx):
     heapify_recursive(arr, 2*idx+2)
     push_down(arr, idx)
 
-
+# O(n) time complexity
 def heapify(arr):
     for i in range((len(arr)-1)//2, -1, -1):
         push_down(arr, i)

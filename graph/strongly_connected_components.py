@@ -41,7 +41,7 @@ def tarjan_scc(adj_list: dict[str, list[str]]) -> list[list[str]]:
                 val = stack.pop()
                 partition.append(val)
                 on_stack_elem.remove(val)
-                if val == node:
+                if val == node:     # pop everything until the scc starter node
                     break
             partitions.append(partition)
 
