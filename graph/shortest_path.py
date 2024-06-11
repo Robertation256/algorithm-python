@@ -1,7 +1,8 @@
 from heapq import heapify, heappush, heappop
 
 
-
+# time complexity O((V+E)logV)
+# space complexity O(V) (ie when one node is connected to the rest of the nodes)
 def dijkstra_shortest_path(adj_list: dict[str, list[tuple[str, int]]], start_node: str):
     
     dst_from_start = {n: float('inf') for n in adj_list.keys()}
