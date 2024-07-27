@@ -24,3 +24,26 @@ def dijkstra_shortest_path(adj_list: dict[str, list[tuple[str, int]]], start_nod
 
     return dst_from_start, prev_node
 
+
+# Floyd–Warshall algorithm
+# for computing shortest paths between all pairs of vertices in a directed, weighted graph
+# complexity O(V^3)
+def shortest_pathes(dist: dict[int, dict[int, int]], vertices_count: int):
+    min_cost = [[float('inf') for i in range(vertices_count)] for j in range(vertices_count)]
+
+    for u in dist.keys():
+        for v in dist[u].keys():
+            min_cost[u][v] = min(min_cost[u][v], dist[u][v])
+    
+
+    for u in range(vertices_count):
+        for v in range(vertices_count):
+            if u == v:
+                min_cost[u][v] = 0
+                continue
+            for k in range(vertices_count): # k the intermediary vertices that we wish to connect u and v
+                min_cost[u][v] = min(min_cost[u][v], min_cost[u][k] + min_cost[k][v])
+    return min_cost
+
+
+
