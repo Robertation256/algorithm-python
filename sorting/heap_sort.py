@@ -67,7 +67,7 @@ class MaxHeap():
 
 
 # time complexity : O(nlogn)
-# space comlexity: O(n)
+# space comlexity: O(1) if done in-place
 # not stable
 def heap_sort(arr):
     #first heapify into a max heap then do swapping heap top to end of priority queue and reduce push_down range
